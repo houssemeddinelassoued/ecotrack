@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Entreprise.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ecotrack</a> &gt; <a href="index.source.html" class="el_package">com.ecotrack.domain</a> &gt; <span class="el_source">Entreprise.java</span></div><h1>Entreprise.java</h1><pre class="source lang-java linenums">package com.ecotrack.domain;
+
+import java.time.LocalDateTime;
+import java.util.UUID;
+
+/**
+ * Entité racine - Le Tenant (Client payeur)
+ * Représente l'entreprise cliente qui souscrit au service EcoTrack.
+ * Assure l'isolation des données (Multi-tenancy).
+ */
+public class Entreprise {
+
+    private UUID id;
+    private String nom;
+    private String siret;
+    private String adresse;
+    private String pays;
+    private String emailContact;
+    private LocalDateTime dateCreation;
+    private boolean actif;
+
+    /**
+     * Constructeur vide
+     */
+<span class="fc" id="L25">    public Entreprise() {</span>
+<span class="fc" id="L26">    }</span>
+
+    /**
+     * Constructeur complet
+     */
+    public Entreprise(UUID id, String nom, String siret, String adresse, String pays, 
+<span class="fc" id="L32">                      String emailContact, LocalDateTime dateCreation, boolean actif) {</span>
+<span class="fc" id="L33">        this.id = id;</span>
+<span class="fc" id="L34">        this.nom = nom;</span>
+<span class="fc" id="L35">        this.siret = siret;</span>
+<span class="fc" id="L36">        this.adresse = adresse;</span>
+<span class="fc" id="L37">        this.pays = pays;</span>
+<span class="fc" id="L38">        this.emailContact = emailContact;</span>
+<span class="fc" id="L39">        this.dateCreation = dateCreation;</span>
+<span class="fc" id="L40">        this.actif = actif;</span>
+<span class="fc" id="L41">    }</span>
+
+    // Getters et Setters
+
+    public UUID getId() {
+<span class="fc" id="L46">        return id;</span>
+    }
+
+    public void setId(UUID id) {
+<span class="fc" id="L50">        this.id = id;</span>
+<span class="fc" id="L51">    }</span>
+
+    public String getNom() {
+<span class="fc" id="L54">        return nom;</span>
+    }
+
+    public void setNom(String nom) {
+<span class="fc" id="L58">        this.nom = nom;</span>
+<span class="fc" id="L59">    }</span>
+
+    public String getSiret() {
+<span class="fc" id="L62">        return siret;</span>
+    }
+
+    public void setSiret(String siret) {
+<span class="fc" id="L66">        this.siret = siret;</span>
+<span class="fc" id="L67">    }</span>
+
+    public String getAdresse() {
+<span class="fc" id="L70">        return adresse;</span>
+    }
+
+    public void setAdresse(String adresse) {
+<span class="fc" id="L74">        this.adresse = adresse;</span>
+<span class="fc" id="L75">    }</span>
+
+    public String getPays() {
+<span class="fc" id="L78">        return pays;</span>
+    }
+
+    public void setPays(String pays) {
+<span class="fc" id="L82">        this.pays = pays;</span>
+<span class="fc" id="L83">    }</span>
+
+    public String getEmailContact() {
+<span class="fc" id="L86">        return emailContact;</span>
+    }
+
+    public void setEmailContact(String emailContact) {
+<span class="fc" id="L90">        this.emailContact = emailContact;</span>
+<span class="fc" id="L91">    }</span>
+
+    public LocalDateTime getDateCreation() {
+<span class="fc" id="L94">        return dateCreation;</span>
+    }
+
+    public void setDateCreation(LocalDateTime dateCreation) {
+<span class="fc" id="L98">        this.dateCreation = dateCreation;</span>
+<span class="fc" id="L99">    }</span>
+
+    public boolean isActif() {
+<span class="fc" id="L102">        return actif;</span>
+    }
+
+    public void setActif(boolean actif) {
+<span class="fc" id="L106">        this.actif = actif;</span>
+<span class="fc" id="L107">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

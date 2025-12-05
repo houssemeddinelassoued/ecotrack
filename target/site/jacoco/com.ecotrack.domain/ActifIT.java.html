@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ActifIT.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ecotrack</a> &gt; <a href="index.source.html" class="el_package">com.ecotrack.domain</a> &gt; <span class="el_source">ActifIT.java</span></div><h1>ActifIT.java</h1><pre class="source lang-java linenums">package com.ecotrack.domain;
+
+import java.time.LocalDate;
+import java.util.UUID;
+
+/**
+ * Entité ActifIT - Matériel informatique physique
+ * Représente un actif IT (Laptop, Serveur, Moniteur, Imprimante) appartenant à l'entreprise.
+ * Garantit l'isolation par entreprise et peut être assigné à un employé.
+ */
+public class ActifIT {
+
+    private UUID id;
+    private UUID entrepriseId;
+    private UUID categorieActifId;
+    private UUID employeId;
+    private String numeroSerie;
+    private String marque;
+    private String modele;
+    private LocalDate dateAcquisition;
+    private LocalDate dateMiseEnService;
+    private String statut;
+    private String localisation;
+
+    /**
+     * Constructeur vide
+     */
+<span class="fc" id="L28">    public ActifIT() {</span>
+<span class="fc" id="L29">    }</span>
+
+    /**
+     * Constructeur complet
+     */
+    public ActifIT(UUID id, UUID entrepriseId, UUID categorieActifId, UUID employeId, 
+                   String numeroSerie, String marque, String modele, LocalDate dateAcquisition, 
+<span class="fc" id="L36">                   LocalDate dateMiseEnService, String statut, String localisation) {</span>
+<span class="fc" id="L37">        this.id = id;</span>
+<span class="fc" id="L38">        this.entrepriseId = entrepriseId;</span>
+<span class="fc" id="L39">        this.categorieActifId = categorieActifId;</span>
+<span class="fc" id="L40">        this.employeId = employeId;</span>
+<span class="fc" id="L41">        this.numeroSerie = numeroSerie;</span>
+<span class="fc" id="L42">        this.marque = marque;</span>
+<span class="fc" id="L43">        this.modele = modele;</span>
+<span class="fc" id="L44">        this.dateAcquisition = dateAcquisition;</span>
+<span class="fc" id="L45">        this.dateMiseEnService = dateMiseEnService;</span>
+<span class="fc" id="L46">        this.statut = statut;</span>
+<span class="fc" id="L47">        this.localisation = localisation;</span>
+<span class="fc" id="L48">    }</span>
+
+    // Getters et Setters
+
+    public UUID getId() {
+<span class="fc" id="L53">        return id;</span>
+    }
+
+    public void setId(UUID id) {
+<span class="fc" id="L57">        this.id = id;</span>
+<span class="fc" id="L58">    }</span>
+
+    public UUID getEntrepriseId() {
+<span class="fc" id="L61">        return entrepriseId;</span>
+    }
+
+    public void setEntrepriseId(UUID entrepriseId) {
+<span class="fc" id="L65">        this.entrepriseId = entrepriseId;</span>
+<span class="fc" id="L66">    }</span>
+
+    public UUID getCategorieActifId() {
+<span class="fc" id="L69">        return categorieActifId;</span>
+    }
+
+    public void setCategorieActifId(UUID categorieActifId) {
+<span class="fc" id="L73">        this.categorieActifId = categorieActifId;</span>
+<span class="fc" id="L74">    }</span>
+
+    public UUID getEmployeId() {
+<span class="fc" id="L77">        return employeId;</span>
+    }
+
+    public void setEmployeId(UUID employeId) {
+<span class="fc" id="L81">        this.employeId = employeId;</span>
+<span class="fc" id="L82">    }</span>
+
+    public String getNumeroSerie() {
+<span class="fc" id="L85">        return numeroSerie;</span>
+    }
+
+    public void setNumeroSerie(String numeroSerie) {
+<span class="fc" id="L89">        this.numeroSerie = numeroSerie;</span>
+<span class="fc" id="L90">    }</span>
+
+    public String getMarque() {
+<span class="fc" id="L93">        return marque;</span>
+    }
+
+    public void setMarque(String marque) {
+<span class="fc" id="L97">        this.marque = marque;</span>
+<span class="fc" id="L98">    }</span>
+
+    public String getModele() {
+<span class="fc" id="L101">        return modele;</span>
+    }
+
+    public void setModele(String modele) {
+<span class="fc" id="L105">        this.modele = modele;</span>
+<span class="fc" id="L106">    }</span>
+
+    public LocalDate getDateAcquisition() {
+<span class="fc" id="L109">        return dateAcquisition;</span>
+    }
+
+    public void setDateAcquisition(LocalDate dateAcquisition) {
+<span class="fc" id="L113">        this.dateAcquisition = dateAcquisition;</span>
+<span class="fc" id="L114">    }</span>
+
+    public LocalDate getDateMiseEnService() {
+<span class="fc" id="L117">        return dateMiseEnService;</span>
+    }
+
+    public void setDateMiseEnService(LocalDate dateMiseEnService) {
+<span class="fc" id="L121">        this.dateMiseEnService = dateMiseEnService;</span>
+<span class="fc" id="L122">    }</span>
+
+    public String getStatut() {
+<span class="fc" id="L125">        return statut;</span>
+    }
+
+    public void setStatut(String statut) {
+<span class="fc" id="L129">        this.statut = statut;</span>
+<span class="fc" id="L130">    }</span>
+
+    public String getLocalisation() {
+<span class="fc" id="L133">        return localisation;</span>
+    }
+
+    public void setLocalisation(String localisation) {
+<span class="fc" id="L137">        this.localisation = localisation;</span>
+<span class="fc" id="L138">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

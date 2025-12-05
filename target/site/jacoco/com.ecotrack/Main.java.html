@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Main.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ecotrack</a> &gt; <a href="index.source.html" class="el_package">com.ecotrack</a> &gt; <span class="el_source">Main.java</span></div><h1>Main.java</h1><pre class="source lang-java linenums">package com.ecotrack;
+
+import com.ecotrack.domain.Employe;
+import com.ecotrack.domain.Entreprise;
+import com.ecotrack.domain.ActifIT;
+import com.ecotrack.domain.CategorieActif;
+import com.ecotrack.domain.ConsoJournaliere;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.UUID;
+
+/**
+ * Point d'entrée de l'application EcoTrack.
+ * 
+ * &lt;p&gt;EcoTrack est une application SaaS B2B de suivi de l'empreinte carbone
+ * du parc informatique des entreprises (Green IT).&lt;/p&gt;
+ * 
+ * &lt;p&gt;Cette classe Main démontre l'utilisation des entités du domaine métier
+ * dans un contexte multi-tenant.&lt;/p&gt;
+ * 
+ * @author EcoTrack Team
+ * @version 1.0
+ * @since Java 21
+ */
+<span class="nc" id="L27">public class Main {</span>
+    
+    /**
+     * Méthode principale démarrant l'application EcoTrack.
+     * 
+     * &lt;p&gt;Démontre la création et manipulation des entités du domaine :
+     * &lt;ul&gt;
+     *   &lt;li&gt;Création d'une entreprise (tenant)&lt;/li&gt;
+     *   &lt;li&gt;Création d'un employé&lt;/li&gt;
+     *   &lt;li&gt;Provisioning d'un actif IT&lt;/li&gt;
+     *   &lt;li&gt;Enregistrement de consommation&lt;/li&gt;
+     * &lt;/ul&gt;
+     * &lt;/p&gt;
+     * 
+     * @param args arguments de ligne de commande (non utilisés)
+     */
+    public static void main(String[] args) {
+<span class="nc" id="L44">        System.out.println(&quot;=== EcoTrack - Green IT Carbon Tracking ===\n&quot;);</span>
+        
+        // Création d'une entreprise (Tenant)
+<span class="nc" id="L47">        Entreprise entreprise = creerEntreprise();</span>
+<span class="nc" id="L48">        afficherEntreprise(entreprise);</span>
+        
+        // Création d'un employé
+<span class="nc" id="L51">        Employe employe = creerEmploye(entreprise.getId());</span>
+<span class="nc" id="L52">        afficherEmploye(employe);</span>
+        
+        // Création d'une catégorie d'actif
+<span class="nc" id="L55">        CategorieActif categorie = creerCategorieActif(entreprise.getId());</span>
+<span class="nc" id="L56">        afficherCategorie(categorie);</span>
+        
+        // Provisioning d'un actif IT
+<span class="nc" id="L59">        ActifIT actif = creerActifIT(entreprise.getId(), categorie.getId(), employe.getId());</span>
+<span class="nc" id="L60">        afficherActif(actif);</span>
+        
+        // Enregistrement d'une consommation journalière
+<span class="nc" id="L63">        ConsoJournaliere conso = creerConsommation(entreprise.getId(), actif.getId());</span>
+<span class="nc" id="L64">        afficherConsommation(conso);</span>
+        
+<span class="nc" id="L66">        System.out.println(&quot;\n[OK] Demonstration terminee avec succes !&quot;);</span>
+<span class="nc" id="L67">        System.out.println(&quot;[INFO] Isolation multi-tenant respectee pour l'entreprise: &quot; + entreprise.getNom());</span>
+<span class="nc" id="L68">    }</span>
+    
+    /**
+     * Crée une entreprise exemple.
+     * 
+     * @return entreprise créée avec données de démonstration
+     */
+    private static Entreprise creerEntreprise() {
+<span class="nc" id="L76">        return new Entreprise(</span>
+<span class="nc" id="L77">            UUID.randomUUID(),</span>
+            &quot;GreenTech Solutions&quot;,
+            &quot;12345678901234&quot;,
+            &quot;42 Rue de l'Innovation, 75001 Paris&quot;,
+            &quot;France&quot;,
+            &quot;contact@greentech.fr&quot;,
+<span class="nc" id="L83">            LocalDateTime.now(),</span>
+            true
+        );
+    }
+    
+    /**
+     * Crée un employé exemple.
+     * 
+     * @param entrepriseId identifiant de l'entreprise (isolation)
+     * @return employé créé
+     */
+    private static Employe creerEmploye(UUID entrepriseId) {
+<span class="nc" id="L95">        return new Employe(</span>
+<span class="nc" id="L96">            UUID.randomUUID(),</span>
+            entrepriseId,
+            &quot;Dupont&quot;,
+            &quot;Marie&quot;,
+            &quot;marie.dupont@greentech.fr&quot;,
+            &quot;IT&quot;,
+            &quot;EMP001&quot;,
+<span class="nc" id="L103">            LocalDate.of(2023, 1, 15),</span>
+            true
+        );
+    }
+    
+    /**
+     * Crée une catégorie d'actif exemple.
+     * 
+     * @param entrepriseId identifiant de l'entreprise
+     * @return catégorie créée
+     */
+    private static CategorieActif creerCategorieActif(UUID entrepriseId) {
+<span class="nc" id="L115">        return new CategorieActif(</span>
+<span class="nc" id="L116">            UUID.randomUUID(),</span>
+            entrepriseId,
+            &quot;LAPTOP&quot;,
+            &quot;Ordinateur Portable&quot;,
+            &quot;Laptop professionnel standard&quot;,
+<span class="nc" id="L121">            65.0, // kWh moyen par an</span>
+            false
+        );
+    }
+    
+    /**
+     * Crée un actif IT exemple.
+     * 
+     * @param entrepriseId identifiant de l'entreprise
+     * @param categorieId identifiant de la catégorie
+     * @param employeId identifiant de l'employé assigné
+     * @return actif IT créé
+     */
+    private static ActifIT creerActifIT(UUID entrepriseId, UUID categorieId, UUID employeId) {
+<span class="nc" id="L135">        return new ActifIT(</span>
+<span class="nc" id="L136">            UUID.randomUUID(),</span>
+            entrepriseId,
+            categorieId,
+            employeId,
+            &quot;SN123456789&quot;,
+            &quot;Dell&quot;,
+            &quot;Latitude 7430&quot;,
+<span class="nc" id="L143">            LocalDate.of(2024, 3, 1),</span>
+<span class="nc" id="L144">            LocalDate.of(2024, 3, 15),</span>
+            &quot;EN_SERVICE&quot;,
+            &quot;Siège Paris&quot;
+        );
+    }
+    
+    /**
+     * Crée une consommation journalière exemple.
+     * 
+     * @param entrepriseId identifiant de l'entreprise
+     * @param actifId identifiant de l'actif IT
+     * @return consommation créée
+     */
+    private static ConsoJournaliere creerConsommation(UUID entrepriseId, UUID actifId) {
+<span class="nc" id="L158">        return new ConsoJournaliere(</span>
+<span class="nc" id="L159">            1L,</span>
+            actifId,
+            entrepriseId,
+<span class="nc" id="L162">            LocalDate.now(),</span>
+            new BigDecimal(&quot;0.178&quot;), // kWh consommé aujourd'hui
+<span class="nc" id="L164">            LocalDateTime.now(),</span>
+            &quot;AUTO_SENSOR&quot;
+        );
+    }
+    
+    /**
+     * Affiche les informations d'une entreprise.
+     * 
+     * @param entreprise entreprise à afficher
+     */
+    private static void afficherEntreprise(Entreprise entreprise) {
+<span class="nc" id="L175">        System.out.println(&quot;[ENTREPRISE] Creee:&quot;);</span>
+<span class="nc" id="L176">        System.out.println(&quot;   Nom: &quot; + entreprise.getNom());</span>
+<span class="nc" id="L177">        System.out.println(&quot;   SIRET: &quot; + entreprise.getSiret());</span>
+<span class="nc" id="L178">        System.out.println(&quot;   Pays: &quot; + entreprise.getPays());</span>
+<span class="nc" id="L179">        System.out.println(&quot;   ID: &quot; + entreprise.getId());</span>
+<span class="nc" id="L180">        System.out.println();</span>
+<span class="nc" id="L181">    }</span>
+    
+    /**
+     * Affiche les informations d'un employé.
+     * 
+     * @param employe employé à afficher
+     */
+    private static void afficherEmploye(Employe employe) {
+<span class="nc" id="L189">        System.out.println(&quot;[EMPLOYE] Cree:&quot;);</span>
+<span class="nc" id="L190">        System.out.println(&quot;   Nom: &quot; + employe.getPrenom() + &quot; &quot; + employe.getNom());</span>
+<span class="nc" id="L191">        System.out.println(&quot;   Email: &quot; + employe.getEmail());</span>
+<span class="nc" id="L192">        System.out.println(&quot;   Departement: &quot; + employe.getDepartement());</span>
+<span class="nc" id="L193">        System.out.println(&quot;   Matricule: &quot; + employe.getMatricule());</span>
+<span class="nc" id="L194">        System.out.println(&quot;   Entreprise ID: &quot; + employe.getEntrepriseId());</span>
+<span class="nc" id="L195">        System.out.println();</span>
+<span class="nc" id="L196">    }</span>
+    
+    /**
+     * Affiche les informations d'une catégorie d'actif.
+     * 
+     * @param categorie catégorie à afficher
+     */
+    private static void afficherCategorie(CategorieActif categorie) {
+<span class="nc" id="L204">        System.out.println(&quot;[CATEGORIE] Creee:&quot;);</span>
+<span class="nc" id="L205">        System.out.println(&quot;   Code: &quot; + categorie.getCode());</span>
+<span class="nc" id="L206">        System.out.println(&quot;   Libelle: &quot; + categorie.getLibelle());</span>
+<span class="nc" id="L207">        System.out.println(&quot;   Conso moyenne: &quot; + categorie.getConsommationMoyenneKwh() + &quot; kWh/an&quot;);</span>
+<span class="nc" id="L208">        System.out.println();</span>
+<span class="nc" id="L209">    }</span>
+    
+    /**
+     * Affiche les informations d'un actif IT.
+     * 
+     * @param actif actif à afficher
+     */
+    private static void afficherActif(ActifIT actif) {
+<span class="nc" id="L217">        System.out.println(&quot;[ACTIF IT] Cree:&quot;);</span>
+<span class="nc" id="L218">        System.out.println(&quot;   Marque/Modele: &quot; + actif.getMarque() + &quot; &quot; + actif.getModele());</span>
+<span class="nc" id="L219">        System.out.println(&quot;   Numero de serie: &quot; + actif.getNumeroSerie());</span>
+<span class="nc" id="L220">        System.out.println(&quot;   Statut: &quot; + actif.getStatut());</span>
+<span class="nc" id="L221">        System.out.println(&quot;   Localisation: &quot; + actif.getLocalisation());</span>
+<span class="nc" id="L222">        System.out.println(&quot;   Employe assigne: &quot; + actif.getEmployeId());</span>
+<span class="nc" id="L223">        System.out.println();</span>
+<span class="nc" id="L224">    }</span>
+    
+    /**
+     * Affiche les informations d'une consommation journalière.
+     * 
+     * @param conso consommation à afficher
+     */
+    private static void afficherConsommation(ConsoJournaliere conso) {
+<span class="nc" id="L232">        System.out.println(&quot;[CONSOMMATION] Enregistree:&quot;);</span>
+<span class="nc" id="L233">        System.out.println(&quot;   Date: &quot; + conso.getDateConsommation());</span>
+<span class="nc" id="L234">        System.out.println(&quot;   Consommation: &quot; + conso.getConsoKwh() + &quot; kWh&quot;);</span>
+<span class="nc" id="L235">        System.out.println(&quot;   Source: &quot; + conso.getSource());</span>
+<span class="nc" id="L236">        System.out.println(&quot;   Actif ID: &quot; + conso.getActifItId());</span>
+<span class="nc" id="L237">        System.out.println();</span>
+<span class="nc" id="L238">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

@@ -1,0 +1,5 @@
+# Created at 2025-12-05T01:04:42.646
+Boot Manifest-JAR contains absolute paths in classpath 'Q:\National Quantum\2-PROJETS\FORMATIONS\AI\Boostez_vos_perf_IA\ecotrack\target\test-classes'
+Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
+'other' has different root
+
